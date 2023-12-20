@@ -1,0 +1,32 @@
+{% extends 'company/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title fw-semibold mb-4">Update Application</h5>
+
+        <a href="{% url 'accept_application' get_application.pk %}" class="btn btn-success">Accept Application</a>
+        <a href="{% url 'reject_application' get_application.pk %}" class="btn btn-danger">Reject Application</a>
+
+        <br>
+        <br>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            Write a message for the applicant
+            <br>
+            <textarea name="application_messsage" id="" cols="50" rows="10">{{get_application.application_messsage}}</textarea>
+            <br>
+            <input type="submit" value="Update">
+        </form>
+
+      </div>
+    </div>
+
+</div>
+  
+{% endblock %}

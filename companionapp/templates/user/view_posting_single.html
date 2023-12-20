@@ -1,0 +1,49 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">
+                {{ jobposting.job_title }}
+                {% if jobposting.verified %}
+                    <img src="{% static 'img/verified.png' %}" alt="Verified" width="20">
+                {% endif %}
+            </h5>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2"><strong>Location:</strong> {{ jobposting.location_job }}</p>
+                    <p class="mb-2"><strong>Department:</strong> {{ jobposting.department }}</p>
+                    <p class="mb-2"><strong>Company Profile:</strong> {{ jobposting.company_profile }}</p>
+                    <a href="{% url 'view_company_profile' jobposting.companyid %}">View Company Profile</a>
+                    <br>
+                    <br>
+                    <p class="mb-2"><strong>Job Description:</strong> {{ jobposting.job_description }}</p>
+                    <!-- Add more fields as needed -->
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-2"><strong>Job Requirements:</strong> {{ jobposting.job_requirements }}</p>
+                    <p class="mb-2"><strong>Job Benefits:</strong> {{ jobposting.job_benefits }}</p>
+                    <p class="mb-2"><strong>Employment Type:</strong> {{ jobposting.employment_type }}</p>
+                    <p class="mb-2"><strong>Required Experience:</strong> {{ jobposting.required_experience }}</p>
+                    <p class="mb-2"><strong>Required Education:</strong> {{ jobposting.required_education }}</p>
+                    <p class="mb-2"><strong>Industry:</strong> {{ jobposting.industry }}</p>
+                    <p class="mb-2"><strong>Job Function:</strong> {{ jobposting.job_function }}</p>
+                    <br>
+                    <br>
+                    <a href="{% url 'apply' jobposting.pk %}" class="btn btn-success">Apply</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  
+{% endblock %}

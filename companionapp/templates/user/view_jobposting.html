@@ -1,0 +1,43 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .custom-card {
+        background-color: #d4edda; /* Light green background color */
+    }
+
+</style>
+
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        {% for job in jobpostings %}
+            <div class="col-md-4 mx-2">
+                <div class="card mb-4 shadow custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ job.job_title }}
+                            {% if job.verified %}
+                                <img src="{% static 'img/verified.png' %}" alt="Verified" width="20">
+                            {% endif %}
+                        </h5>
+                        <p class="card-text">Location: {{ job.location_job }}</p>
+                        <p class="card-text">Department: {{ job.department }}</p>
+                        <!-- Add more fields as needed -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'view_posting_single' job.pk %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                </div><div class="row mt-4">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+  
+{% endblock %}

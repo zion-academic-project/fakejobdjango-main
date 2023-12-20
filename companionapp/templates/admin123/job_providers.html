@@ -1,0 +1,51 @@
+{% extends 'admin123/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Job Providers</h5>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Contact Number</th>
+                            <th>Profile Picture</th>
+                            <th>Verified</th>
+                            <th>About Company</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                        <tr>
+                            <td>{{ job.name }}</td>
+                            <td>{{ job.mobile_number }}</td>
+                            <td>
+                                {% if job.profile_picture %}
+                                <img src="{{ job.imageURL }}" alt="{{ job.name }}" class="img-thumbnail" style="max-width: 100px;">
+                                {% else %}
+                                No Picture
+                                {% endif %}
+                            </td>
+                            <td>{{ job.verified }}</td>
+                            <td>{{ job.aboutme }}</td>
+                            <td><a href="{% url 'remove_company' job.pk %}" class="btn btn-danger">Remove</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

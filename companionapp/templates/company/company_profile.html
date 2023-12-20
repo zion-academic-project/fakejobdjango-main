@@ -1,0 +1,66 @@
+{% extends 'company/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h5 class="card-title fw-semibold m-3 text-center">My Profile</h5>
+
+  
+
+<div style="padding: 18px;">
+    <form action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        
+        <div style="text-align: center;">
+            <a href="{{ request.user.imageURL }}" target="_blank">
+                <img src="{{ request.user.imageURL }}" alt="Profile Picture" height="200px">
+            </a>
+            <br>
+            <label for="profile_picture" class="btn btn-primary" style="cursor: pointer;">Choose Profile Picture</label>
+            <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{ request.user.name }}" class="form-control">
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="mob">Phone Number</label>
+            <input type="text" id="mob" name="mobile_number" value="{{ request.user.mobile_number }}" class="form-control">
+        </div>
+        
+        <br>
+
+
+        <div class="form-group">
+            <label for="aboutme">About Company</label>
+            <textarea id="aboutme" name="aboutme" rows="4" class="form-control">{{ request.user.aboutme }}</textarea>
+        </div>
+
+
+        <br>
+        
+        <input type="submit" value="Update" class="btn btn-primary btn-md">
+    </form>
+</div>
+
+
+
+
+
+
+{% endblock %}

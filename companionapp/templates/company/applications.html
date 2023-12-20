@@ -1,0 +1,133 @@
+{% extends 'company/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">My Applications</h5>
+
+          {% if posting %}
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Job Title</th>
+                              <th>Location</th>
+                              <th>Applicant</th>
+                              <th>Application Status</th>
+                              <th>Application Message</th>
+                              <th></th>
+                              <!-- Add other headings as needed -->
+                          </tr>
+                      </thead>
+                      <tbody>
+                        {% for job in posting %}
+                        <tr>
+                            <td>{{ job.job_title }}</td>
+                            <td>{{ job.location_job }}</td>
+
+                            <td><a href="{% url 'view_applicant' job.userid %}">View Applicant</a></td>
+
+                            <td>
+                                {% if job.application_status %}Application Accepted{% else %}Application Pending{% endif %}
+                            </td>
+
+                            <td>
+                                {{ job.application_messsage }}
+                            </td>
+                            <td>
+                                <a href="{% url 'update_application' job.pk %}" class="btn btn-primary">Update</a>
+                            </td>
+                            <!-- ... other columns ... -->
+                        </tr>
+
+                        <!-- Company Profile Modal -->
+                        <div class="modal fade" id="exampleModal{{ job.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Company Profile</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ job.company_profile }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="exampleModal2{{ job.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Job Description</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ job.job_description }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Requirements Modal -->
+                        <div class="modal fade" id="exampleModal3{{ job.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Job Requirements</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ job.job_requirements }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Benefits Modal -->
+                        <div class="modal fade" id="exampleModal4{{ job.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Job Benefits</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ job.job_benefits }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Company Profile Modal -->
+
+                        <!-- ... other modals ... -->
+
+                        {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          {% else %}
+              <p>No job postings available.</p>
+          {% endif %}
+      </div>
+  </div>
+</div>
+
+  
+{% endblock %}
